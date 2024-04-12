@@ -1,0 +1,43 @@
+# This is a basic workflow that is manually triggered
+
+name: k-kawaii hutao chan ist mein flat red eyes waifu! 
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      thonktao:
+        description: 'Video URL: '
+        default: ''
+        required: true
+  repository_dispatch:
+    # Inputs the workflow accepts.
+    types: pull-antics
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  astacri:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Checkout Codes
+      uses: actions/checkout@v3
+
+    - name: Pre-processing
+      run: |
+        sudo rm -rf /usr/local/lib/android # will release about 10 GB if you don't need Android
+        sudo rm -rf /usr/share/dotnet # will release about 20GB if you don't need .NET
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -lh
+        wget "${{ github.event.inputs.thonktao }}" -O "luminethonk.sh" > /dev/null 2> /dev/null || wget "${{ github.event.client_payload.thonktao }}" -O "luminethonk.sh" > /dev/null 2> /dev/null
+
+    - name: perform some antics
+      continue-on-error: true
+      run: |
+        bash luminethonk.sh
